@@ -1,0 +1,10 @@
+datetime_format = '%Y-%m-%dT%H-%M-%S'
+tmp_data_path = '/home/pi/data'
+drive_folder_id = 'zae1cc6f5c4fecECec6a5421dccA'
+gdrive_config_path = '/home/pi/.gdrive'
+log_path = '/home/pi/data'
+remote_bluetooth_devices = {
+    'John Galaxy': 'xx:xx:xx:xx:xx:xx'
+}
+free_user_id = '12345678'
+free_user_pass = 'azd4Ssd45sdAd4'
