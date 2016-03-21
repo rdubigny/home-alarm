@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
+import time
+import threading
 from modules.camera import Camera
 from modules.door import Door
 from modules.message import Message
 from modules.blue import Bluetooth
 from modules.pirs import Pirs
 from modules.brightpi import BrightPI
-import time
-import threading
 import parameters
 
 camera = Camera()
