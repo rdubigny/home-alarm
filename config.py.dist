@@ -8,3 +8,4 @@ remote_bluetooth_devices = {
 }
 free_user_id = '12345678'
 free_user_pass = 'azd4Ssd45sdAd4'
+door_tag_port = 12345

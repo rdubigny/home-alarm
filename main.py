@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from modules.camera import Camera
+from modules.door import Door
 from modules.message import Message
 from modules.blue import Bluetooth
 from modules.pirs import Pirs
@@ -10,6 +11,7 @@ import threading
 import parameters
 
 camera = Camera()
+door = Door()
 message = Message()
 bluetooth = Bluetooth()
 pirs = Pirs()
@@ -49,7 +51,7 @@ def recurrent_bluetooth_scan(is_armed_wrapper):
 
 def main_loop():
     while True:
-        if is_armed_wrapper[0] and pirs.is_detecting_move():
+        if is_armed_wrapper[0] and (pirs.is_detecting_move() or door.is_opened()):
             message.send_message_async('presence detected')
             bright_pi.turn_leds_on(mode='ir_only')
             camera.capture_and_upload_async()
@@ -61,6 +63,11 @@ def main_loop():
 new_bluetooth_thread = threading.Thread(target=recurrent_bluetooth_scan, args=[is_armed_wrapper])
 new_bluetooth_thread.daemon = True  # stop if the program exits
 new_bluetooth_thread.start()
+
+# start listening door tag
+new_doortag_thread = threading.Thread(target=door.listen)
+new_doortag_thread.daemon = True  # stop if the program exits
+new_doortag_thread.start()
 
 # start main loop
 main_loop()
