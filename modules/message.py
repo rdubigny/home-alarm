@@ -23,7 +23,7 @@ class Message:
         if r.status_code is 200:
             logger.logger.info('MESSAGE SENT!')
         else:
-            logger.logger.error('MESSAGE NOT SENT!')
+            logger.logger.info('MESSAGE NOT SENT!')
         pass
 
     def send_message_async(self, message):

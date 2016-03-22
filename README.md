@@ -99,3 +99,8 @@ echo "sudo service alarm start" >> /etc/rc.local
 * https://learn.adafruit.com/shake-up-a-gift-box/circuit-diagram
 * https://learn.adafruit.com/introducing-trinket
 * https://learn.adafruit.com/trinket-bluetooth-alarm-system/overview
+
+#### 22/03/16
+
+* https://docs.python.org/3.2/library/logging.handlers.html
+* https://docs.python.org/3.2/howto/logging.html
