@@ -4,4 +4,4 @@ camera_rotation = 0
 message_min_interval_between_message = 15
 main_interval_between_scan_while_armed = 30
 main_interval_between_scan_while_disarmed = 300
-opening_alert_duration = 5
+opening_alert_duration = 10

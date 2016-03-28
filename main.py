@@ -26,10 +26,14 @@ scanner.scan()
 
 def main_loop():
     while True:
-        if scanner.is_armed and (pirs.is_detecting_move() or door.is_opened()):
-            message.send_message_async('presence detected')
-            bright_pi.turn_leds_on(mode='ir_only')
-            camera.capture_and_upload_async()
+        if scanner.is_armed:
+            if pirs.is_detecting_move() or door.is_opened():
+                message.send_message_async('presence detected')
+                bright_pi.turn_leds_on(mode='ir_only')
+                camera.capture_and_upload_async()
+            else:
+                if door.is_vibrating():
+                    message.send_message_async('presence felt')
         else:
             time.sleep(1)
 
