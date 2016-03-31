@@ -104,3 +104,8 @@ echo "sudo service alarm start" >> /etc/rc.local
 
 * https://docs.python.org/3.2/library/logging.handlers.html
 * https://docs.python.org/3.2/howto/logging.html
+
+#### 31/03/16
+
+* http://bohdan-danishevsky.blogspot.fr/2015/10/building-python-35-on-raspberry-pi-2.html
+* https://www.raspberrypi.org/forums/viewtopic.php?f=32&t=99980#p696458
