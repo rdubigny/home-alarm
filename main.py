@@ -33,6 +33,7 @@ def main_loop():
                 camera.capture_and_upload_async()
             else:
                 if door.is_vibrating():
+                    # TODO this will be triggered every loop during one second, this is far to much
                     message.send_message_async('presence felt')
         else:
             time.sleep(1)
