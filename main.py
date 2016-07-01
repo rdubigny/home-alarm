@@ -2,17 +2,19 @@
 
 import time
 import threading
+
+from modules.brightpi import BrightPI
 from modules.camera import Camera
 from modules.door import Door
+from modules.emberlight import Emberlight
 from modules.message import Message
-from modules.blue import Scanner
 from modules.pirs import Pirs
-from modules.brightpi import BrightPI
-import parameters
+from modules.blue import Scanner
 
 bright_pi = BrightPI()
 camera = Camera()
 door = Door()
+emberlight = Emberlight()
 message = Message()
 pirs = Pirs()
 scanner = Scanner()
@@ -20,12 +22,15 @@ scanner = Scanner()
 # check that everything is ok
 message.send_message_async('alarm started')
 bright_pi.turn_leds_on(mode='all')
+emberlight.turn_on(5)
 camera.capture_and_upload_async()
 scanner.scan()
 
 
 def main_loop():
     while True:
+        if pirs.is_detecting_move() or door.is_opened() or door.is_vibrating():
+            emberlight.turn_on()
         if scanner.is_armed:
             if pirs.is_detecting_move() or door.is_opened():
                 message.send_message_async('presence detected')
