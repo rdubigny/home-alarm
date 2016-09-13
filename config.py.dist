@@ -10,3 +10,5 @@ free_user_id = '12345678'
 free_user_pass = 'azd4Ssd45sdAd4'
 door_tag_port = 12345
 maker_ifttt_api_key = 'abcdefghABCDEFGH12345'
+maker_ifttt_turn_light_on_action_name = 'turn_light_on'
+maker_ifttt_turn_light_off_action_name = 'turn_light_off'

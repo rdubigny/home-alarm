@@ -18,7 +18,8 @@ class Emberlight:
         if self.timer is None:
             # if no timer was previously set then turn on the light
             # TODO make this async
-            r = requests.get('https://maker.ifttt.com/trigger/turn_light_on/with/key/' + config.maker_ifttt_api_key)
+            r = requests.get('https://maker.ifttt.com/trigger/' + config.maker_ifttt_turn_light_on_action_name
+                             + '/with/key/' + config.maker_ifttt_api_key)
             if r.status_code is 200:
                 logger.logger.info('EMBERLIGHT ON!')
             else:
@@ -34,7 +35,8 @@ class Emberlight:
         self.timer.start()
 
     def turn_off(self):
-        r = requests.get('https://maker.ifttt.com/trigger/turn_light_off/with/key/' + config.maker_ifttt_api_key)
+        r = requests.get('https://maker.ifttt.com/trigger/' + config.maker_ifttt_turn_light_off_action_name
+                         + '/with/key/' + config.maker_ifttt_api_key)
         if r.status_code is 200:
             logger.logger.info('EMBERLIGHT OFF!')
         else:
