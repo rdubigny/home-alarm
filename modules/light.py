@@ -6,25 +6,26 @@ from modules import logger
 import config
 import parameters
 
-
-class Emberlight:
+class Light:
 
     def __init__(self):
         self.timer = None
         signal.signal(signal.SIGINT, self.cleanup)
         signal.signal(signal.SIGTERM, self.cleanup)
+        self.url = 'http://' + config.light_api_ip + '/api/' + config.light_api_key + '/lights/' \
+              + config.light_api_lamp_id + '/state'
 
     def turn_on(self, duration = parameters.lightup_duration):
         if self.timer is None:
             # if no timer was previously set then turn on the light
             # TODO make this async
-            r = requests.get('https://maker.ifttt.com/trigger/' + config.maker_ifttt_turn_light_on_action_name
-                             + '/with/key/' + config.maker_ifttt_api_key)
+            payload = "{\"on\":true}"
+            r = requests.request("PUT", self.url, data=payload)
             if r.status_code is 200:
-                logger.logger.info('EMBERLIGHT ON!')
+                logger.logger.info('LIGHT ON!')
             else:
                 # TODO manage error case
-                logger.logger.info('IFTTT NOT RESPONDING!')
+                logger.logger.info('LIGHT NOT RESPONDING!')
         else:
             # reset timer
             self.timer.cancel()
@@ -35,12 +36,12 @@ class Emberlight:
         self.timer.start()
 
     def turn_off(self):
-        r = requests.get('https://maker.ifttt.com/trigger/' + config.maker_ifttt_turn_light_off_action_name
-                         + '/with/key/' + config.maker_ifttt_api_key)
+        payload = "{\"on\":false}"
+        r = requests.request("PUT", self.url, data=payload)
         if r.status_code is 200:
-            logger.logger.info('EMBERLIGHT OFF!')
+            logger.logger.info('LIGHT OFF!')
         else:
-            logger.logger.info('IFTTT NOT RESPONDING!')
+            logger.logger.info('LIGHT NOT RESPONDING!')
         if self.timer is not None:
             self.timer = None
 

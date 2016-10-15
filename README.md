@@ -109,3 +109,12 @@ echo "sudo service alarm start" >> /etc/rc.local
 
 * http://bohdan-danishevsky.blogspot.fr/2015/10/building-python-35-on-raspberry-pi-2.html
 * https://www.raspberrypi.org/forums/viewtopic.php?f=32&t=99980#p696458
+
+#### 03/10/16
+
+* https://raspberrypi.stackexchange.com/questions/27475/wifi-disconnects-after-period-of-time-on-raspberry-pi-doesnt-reconnect
+* https://raspberrypi.stackexchange.com/questions/9257/whats-the-difference-between-wpa-roam-and-wpa-conf-in-the-etc-network-inte
+
+#### 15/10/16
+
+* http://www.developers.meethue.com/
