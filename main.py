@@ -26,7 +26,7 @@ scanner.scan()
 
 def main_loop():
     while True:
-        if pirs.is_detecting_move() or door.is_opened() or door.is_vibrating():
+        if pirs.is_detecting_move() or door.is_opened():
             light.turn_on()
         if scanner.is_armed:
             if pirs.is_detecting_move() or door.is_opened():
