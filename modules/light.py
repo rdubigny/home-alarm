@@ -43,6 +43,7 @@ class Light:
         else:
             logger.logger.info('LIGHT NOT RESPONDING!')
         if self.timer is not None:
+            self.timer.cancel()
             self.timer = None
 
     def cleanup(self, *args):
