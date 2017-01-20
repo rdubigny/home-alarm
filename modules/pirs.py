@@ -1,5 +1,5 @@
 import RPi.GPIO as io
-
+from modules import logger
 
 class Pirs:
 
@@ -9,4 +9,7 @@ class Pirs:
         io.setup(self.pir_pin, io.IN)
 
     def is_detecting_move(self):
-        return io.input(self.pir_pin)
+        move_detected = io.input(self.pir_pin)
+        if move_detected:
+            logger.logger.debug('PIR DETECTION!')
+        return move_detected

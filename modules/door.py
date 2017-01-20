@@ -16,10 +16,16 @@ class Door:
         self.socket = None
 
     def is_opened(self):
-        return utils.seconds_between(self.last_opened, utils.get_time()) < self.opening_alert_duration
+        is_opened = utils.seconds_between(self.last_opened, utils.get_time()) < self.opening_alert_duration
+        if is_opened:
+            logger.logger.debug('OPEN DETECTION!')
+        return is_opened
 
     def is_vibrating(self):
-        return utils.seconds_between(self.last_hitten, utils.get_time()) < self.hit_alert_duration
+        is_vibrating = utils.seconds_between(self.last_hitten, utils.get_time()) < self.hit_alert_duration
+        if is_vibrating:
+            logger.logger.debug('VIBE DETECTION!')
+        return is_vibrating
 
     def listen(self):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
