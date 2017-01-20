@@ -1,8 +1,8 @@
 import RPi.GPIO as io
 from modules import logger
 
-class Pirs:
 
+class Pirs:
     def __init__(self):
         io.setmode(io.BCM)
         self.pir_pin = 4
