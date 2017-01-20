@@ -7,3 +7,4 @@ main_interval_between_scan_while_disarmed = 300
 door_opening_alert_duration = 15
 door_hit_alert_duration = 1
 lightup_duration = 120
+message_timeout = 0.1
