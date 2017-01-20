@@ -16,7 +16,7 @@ class MessageServer:
         logger.logger.debug('MESSAGE LISTENING...      ' + str(self.port))
         while True:
             conn, addr = self.socket.accept()
-            logger.logger.debug('TAG CONNECTED!            ' + str(addr))
+            logger.logger.debug('INCOMING DATA...          ' + str(addr))
             while True:
                 data = conn.recv(1024).decode('UTF-8')
                 if not data:
