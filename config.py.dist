@@ -1,5 +1,8 @@
+# common
 datetime_format = '%Y-%m-%dT%H-%M-%S'
 tmp_data_path = '/home/pi/data'
+
+# control center specific
 drive_folder_id = 'zae1cc6f5c4fecECec6a5421dccA'
 gdrive_config_path = '/home/pi/.gdrive'
 log_path = '/home/pi/data'
@@ -14,3 +17,8 @@ light_api_key = 'abcdefghijklmnopqrstuvwxyzABCDEF01234567'
 light_api_lamp_id = '1'
 siren_ip = '192.168.x.x'
 siren_port = 12345
+
+# door tag specific
+control_center_ip = '192.168.x.x'
+control_center_port = 12345
+siren_command_port = 12346
