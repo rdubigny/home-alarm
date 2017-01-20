@@ -1,7 +1,7 @@
 import bluetooth
 import time
 from modules import logger
-from modules.message import Message
+from modules.sms import Sms
 import config
 import parameters
 
@@ -31,15 +31,15 @@ class Bluetooth:
 class Scanner:
     def __init__(self):
         self.bluetooth = Bluetooth()
-        self.message = Message()
+        self.sms = Sms()
         self.is_armed = True
 
     def scan(self):
         self.is_armed = not self.bluetooth.is_there_friendly_devices_nearby()
         if self.is_armed:
-            self.message.send_message_async('system armed')
+            self.sms.send_sms_async('system armed')
         else:
-            self.message.send_message_async('system disarmed')
+            self.sms.send_sms_async('system disarmed')
 
     def watch(self):
         while True:
@@ -50,9 +50,9 @@ class Scanner:
             will_arm = not self.bluetooth.is_there_friendly_devices_nearby()
             if not self.is_armed:
                 if will_arm:
-                    self.message.send_message_async('system armed')
+                    self.sms.send_sms_async('system armed')
                     self.is_armed = True
             else:
                 if not will_arm:
-                    self.message.send_message_async('system disarmed')
+                    self.sms.send_sms_async('system disarmed')
                     self.is_armed = False

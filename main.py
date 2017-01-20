@@ -6,19 +6,19 @@ import threading
 from modules.camera import Camera
 from modules.door import Door
 from modules.light import Light
-from modules.message import Message
+from modules.sms import Sms
 from modules.pirs import Pirs
 from modules.blue import Scanner
 
 camera = Camera()
 door = Door()
 light = Light()
-message = Message()
+sms = Sms()
 pirs = Pirs()
 scanner = Scanner()
 
 # check that everything is ok
-message.send_message_async('alarm started')
+sms.send_sms_async('alarm started')
 light.turn_on(5)
 camera.capture_and_upload_async()
 scanner.scan()
@@ -30,11 +30,11 @@ def main_loop():
             light.turn_on()
         if scanner.is_armed:
             if pirs.is_detecting_move() or door.is_opened():
-                message.send_message_async('presence detected')
+                sms.send_sms_async('presence detected')
                 camera.capture_and_upload_async()
             else:
                 if door.is_vibrating():
-                    message.send_message_async('presence felt')
+                    sms.send_sms_async('presence felt')
                     time.sleep(0.5)
         else:
             time.sleep(1)
