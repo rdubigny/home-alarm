@@ -1,3 +1,5 @@
+from rx.subjects import Subject
+
 from modules import logger
 from modules import utils
 from modules.message_server import MessageServer
@@ -13,6 +15,7 @@ class DoorListener:
         self.last_opened = utils.get_time_x_seconds_ago(self.opening_alert_duration + 1)
         self.hit_alert_duration = parameters.door_hit_alert_duration
         self.last_hitten = utils.get_time_x_seconds_ago(self.hit_alert_duration + 1)
+        self.openDoorStream = Subject()
 
     def is_opened(self):
         is_opened = utils.seconds_between(self.last_opened, utils.get_time()) < self.opening_alert_duration
@@ -29,6 +32,7 @@ class DoorListener:
     def on_message(self, data):
         if data == 'door opened':
             self.last_opened = utils.get_time()
+            self.openDoorStream.on_next(True)
         if data == 'door hit':
             self.last_hitten = utils.get_time()
 

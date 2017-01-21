@@ -1,6 +1,7 @@
+import RPi.GPIO as io
+import signal
 import socket
 import sys
-import RPi.GPIO as io
 import threading
 
 from modules import logger
