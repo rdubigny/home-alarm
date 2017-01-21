@@ -141,3 +141,8 @@ echo "sudo service alarm start" >> /etc/rc.local
 * http://bohdan-danishevsky.blogspot.fr/2015/10/building-python-35-on-raspberry-pi-2.html
 
 ## Common documentation
+
+#### 20/01/2017
+
+* https://raspberrypi.stackexchange.com/questions/7341/raspberry-pi-and-scream-out-loud-110dba-fixed-tone-siren
+* http://www.instructables.com/id/Controlling-Any-Device-Using-a-Raspberry-Pi-and-a-/?ALLSTEPS
