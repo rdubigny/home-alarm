@@ -14,6 +14,8 @@ import parameters
 class SirenListener:
     def __init__(self):
         self.timer = None
+        signal.signal(signal.SIGINT, self.cleanup)
+        signal.signal(signal.SIGTERM, self.cleanup)
         self.siren_message_server = MessageServer(config.siren_command_port)
         self.siren_pin = 14
         io.setmode(io.BCM)
