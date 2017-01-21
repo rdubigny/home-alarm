@@ -6,6 +6,6 @@ door_opening_alert_duration = 15
 lightup_duration = 120
 main_interval_between_scan_while_armed = 30
 main_interval_between_scan_while_disarmed = 300
-message_timeout = 0.1
+message_timeout = 0.2
 siren_alert_duration = 120
 sms_min_interval_between_sms = 5
