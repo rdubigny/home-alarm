@@ -146,3 +146,9 @@ echo "sudo service alarm start" >> /etc/rc.local
 
 * https://raspberrypi.stackexchange.com/questions/7341/raspberry-pi-and-scream-out-loud-110dba-fixed-tone-siren
 * http://www.instructables.com/id/Controlling-Any-Device-Using-a-Raspberry-Pi-and-a-/?ALLSTEPS
+
+#### 21/01/2017
+
+* http://reactivex.io/documentation/operators.html
+* https://github.com/ReactiveX/RxPY/tree/6beb2e2cbb108fdf924561f9431eb4aa610c6ad9/rx/linq/observable
+* https://github.com/ReactiveX/RxPY/blob/develop/notebooks/Getting%20Started.ipynb
