@@ -17,6 +17,7 @@ To be continued.
 To start the alarm at boot edit the DIR variable in `scripts/alarm.sh` then:
 
 ```
+chmod +rx /home/pi/AlarmEngine/main.py
 sudo su -
 ln -s /path/to/scripts/alarm.sh /etc/init.d/alarm
 chmod +rx /etc/init.d/alarm
