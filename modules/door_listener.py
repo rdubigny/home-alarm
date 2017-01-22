@@ -16,6 +16,7 @@ class DoorListener:
         self.hit_alert_duration = parameters.door_hit_alert_duration
         self.last_hitten = utils.get_time_x_seconds_ago(self.hit_alert_duration + 1)
         self.openDoorStream = Subject()
+        self.vibeDoorStream = Subject()
 
     def is_opened(self):
         is_opened = utils.seconds_between(self.last_opened, utils.get_time()) < self.opening_alert_duration
@@ -35,6 +36,7 @@ class DoorListener:
             self.openDoorStream.on_next(True)
         if data == 'door hit':
             self.last_hitten = utils.get_time()
+            self.vibeDoorStream.on_next(True)
 
     def listen(self):
         self.door_message_server.listen(self.on_message)

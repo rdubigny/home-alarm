@@ -12,7 +12,7 @@ class MessageClient:
     def send(self, message):
         logger.logger.info(message.upper() + '!')
         try:
-            logger.logger.debug('SENDING MESSAGE...')
+            logger.logger.debug('SENDING MESSAGE...     ' + message.upper())
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.settimeout(parameters.message_timeout)
             s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)

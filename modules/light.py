@@ -12,7 +12,6 @@ class LightOnObserver(Observer):
                    + config.light_api_lamp_id + '/state'
 
     def turn_on(self):
-        # TODO make this async
         payload = "{\"on\":true}"
         r = requests.request("PUT", self.url, data=payload)
         if r.status_code is 200:
@@ -42,6 +41,7 @@ class LightOffObserver(Observer):
         if r.status_code is 200:
             logger.logger.info('LIGHT OFF!')
         else:
+            # TODO: catch error instead of that
             logger.logger.info('LIGHT NOT RESPONDING!')
 
     def on_next(self, x):

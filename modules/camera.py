@@ -1,15 +1,17 @@
 import picamera
 import threading
+import time
 import subprocess
+from rx import Observer
+
 from modules import logger
 from modules import utils
+
 import config
 import parameters
-import time
 
 
 class Camera:
-
     def __init__(self):
         camera = picamera.PiCamera()
         camera.vflip = True
@@ -20,7 +22,7 @@ class Camera:
 
     def upload_to_drive(self, picture_path):
         logger.logger.info('UPLOADING TO DRIVE...     ' + picture_path)
-        bash_command = 'drive -c ' + config.gdrive_config_path + ' upload -p ' + config.drive_folder_id + ' -f ' +\
+        bash_command = 'drive -c ' + config.gdrive_config_path + ' upload -p ' + config.drive_folder_id + ' -f ' + \
                        picture_path + ' 1>/dev/null && rm ' + picture_path
         process = subprocess.Popen(bash_command, shell=True)
         output = process.communicate()[0]
