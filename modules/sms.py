@@ -1,6 +1,6 @@
 import requests
 import threading
-from rx.observer import Observer
+from rx import Observer
 
 from modules import logger
 from modules import utils

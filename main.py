@@ -4,7 +4,7 @@ from rx import Observable
 import time
 import threading
 
-from modules.camera import Camera
+from modules.camera import CameraObserver
 from modules.door_listener import DoorListener
 from modules.light import LightOnObserver
 from modules.light import LightOffObserver
@@ -17,7 +17,6 @@ from modules.blue import Scanner
 
 import parameters
 
-camera = Camera()
 door_listener = DoorListener()
 siren_client = SirenClient()
 sms = Sms()
@@ -28,7 +27,7 @@ scanner = Scanner()
 sms.send_sms_async('alarm started')
 Observable.just(True).subscribe(LightOnObserver())
 Observable.timer(2000).subscribe(LightOffObserver())
-camera.capture_and_upload_async()
+# camera.capture_and_upload_async()  # TODO take an initial photo on startup
 scanner.scan()
 
 
@@ -73,21 +72,18 @@ def main():
         .pausable(scanner.blueStream).subscribe(SirenClientObserver())
 
     # take photo if pir detection or door opened or door vibe
-    # TODO: complete this
-    # door_listener.openDoorStream.merge(door_listener.vibeDoorStream).merge(pirs.pirStream).repeat(10)\
-    #     .pausable(scanner.blueStream)\
-    #     .subscribe(print)
+    # TODO: more test on this
+    door_listener.openDoorStream.merge(door_listener.vibeDoorStream).merge(pirs.pirStream) \
+        .select_many(Observable.interval(200).take(10)).throttle_first(200) \
+        .pausable(scanner.blueStream) \
+        .subscribe(CameraObserver())
 
     # if the subscriber doesn't get the first blueStream event they will be paused by default
     # TODO:  use a replay here instead of the following workaround
     scanner.scan()
 
     while True:
-        if scanner.is_armed:
-            if pirs.is_detecting_move() or door_listener.is_opened():
-                camera.capture_and_upload_async()
-        else:
-            time.sleep(1)
+        time.sleep(1)
 
 # start main loop
 if __name__ == '__main__':
