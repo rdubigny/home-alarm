@@ -1,9 +1,10 @@
 import bluetooth
+from rx import Observable
 from rx.subjects import Subject
 import time
 
 from modules import logger
-from modules.sms import Sms
+from modules.sms import SmsObserver
 
 import config
 import parameters
@@ -34,18 +35,19 @@ class Scanner:
     def __init__(self):
         self.blueStream = Subject()
         self.bluetooth = Bluetooth()
-        self.sms = Sms()
         self.is_armed = True
 
     def scan(self):
         self.is_armed = not self.bluetooth.is_there_friendly_devices_nearby()
         self.blueStream.on_next(self.is_armed)
+        # TODO: decouple sms alert
         if self.is_armed:
-            self.sms.send_sms_async('system armed')
+            Observable.just(True).subscribe(SmsObserver('system armed'))
         else:
-            self.sms.send_sms_async('system disarmed')
+            Observable.just(True).subscribe(SmsObserver('system disarmed'))
 
     def watch(self):
+        # TODO: simplify this with reactive programming
         while True:
             if self.is_armed:
                 time.sleep(parameters.main_interval_between_scan_while_armed)

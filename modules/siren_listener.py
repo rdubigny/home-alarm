@@ -22,6 +22,7 @@ class SirenListener:
         io.setup(self.siren_pin, io.OUT)
         io.output(self.siren_pin, io.HIGH)
         logger.logger.info('SIREN OFF!')
+        # TODO: remove duration calculation with reactive programing
         self.siren_alert_duration = parameters.siren_alert_duration
 
     def turn_on(self, duration=parameters.siren_alert_duration):

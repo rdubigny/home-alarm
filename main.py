@@ -8,9 +8,7 @@ from modules.camera import CameraObserver
 from modules.door_listener import DoorListener
 from modules.light import LightOnObserver
 from modules.light import LightOffObserver
-from modules.siren_client import SirenClient
 from modules.siren_client import SirenClientObserver
-from modules.sms import Sms
 from modules.sms import SmsObserver
 from modules.pirs import Pirs
 from modules.blue import Scanner
@@ -18,16 +16,15 @@ from modules.blue import Scanner
 import parameters
 
 door_listener = DoorListener()
-siren_client = SirenClient()
-sms = Sms()
 pirs = Pirs()
 scanner = Scanner()
 
 # check that everything is ok
-sms.send_sms_async('alarm started')
+Observable.just(True).subscribe(SmsObserver('alarm started'))
 Observable.just(True).subscribe(LightOnObserver())
 Observable.timer(2000).subscribe(LightOffObserver())
-# camera.capture_and_upload_async()  # TODO take an initial photo on startup
+# rise error: Camera component couldn't be enabled: Out of resources (other than memory)
+# Observable.just(True).subscribe(CameraObserver())  # TODO take an initial photo on startup
 scanner.scan()
 
 
@@ -73,8 +70,9 @@ def main():
 
     # take photo if pir detection or door opened or door vibe
     # TODO: more test on this
+    # TODO: put camera interval in a variable
     door_listener.openDoorStream.merge(door_listener.vibeDoorStream).merge(pirs.pirStream) \
-        .select_many(Observable.interval(200).take(10)).throttle_first(200) \
+        .select_many(Observable.interval(1000).take(20)).throttle_first(1000) \
         .pausable(scanner.blueStream) \
         .subscribe(CameraObserver())
 
@@ -83,6 +81,8 @@ def main():
     scanner.scan()
 
     while True:
+        # TODO: use a infinit loop instead
+        # TODO: manage interruption
         time.sleep(1)
 
 # start main loop

@@ -17,7 +17,7 @@ class LightOnObserver(Observer):
         if r.status_code is 200:
             logger.logger.info('LIGHT ON!')
         else:
-            # TODO manage error case
+            # TODO: catch error instead of that
             logger.logger.info('LIGHT NOT RESPONDING!')
 
     def on_next(self, x):

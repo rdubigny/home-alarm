@@ -1,11 +1,9 @@
 bluetooth_lookup_timeout = 3
 brightpi_turnoff_timer = 5
 camera_rotation = 0
-door_hit_alert_duration = 1
-door_opening_alert_duration = 15
 lightup_duration = 120
 main_interval_between_scan_while_armed = 30
 main_interval_between_scan_while_disarmed = 300
-message_timeout = 0.2
+message_timeout = 2.0
 siren_alert_duration = 120
 sms_min_interval_between_sms = 5

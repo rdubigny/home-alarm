@@ -15,9 +15,3 @@ class Pirs:
     def hit_callback(self, channel):
         logger.logger.debug('PIR DETECTION!')
         self.pirStream.on_next(True)
-
-    def is_detecting_move(self):
-        move_detected = io.input(self.pir_pin)
-        if move_detected:
-            logger.logger.debug('PIR DETECTION!')
-        return move_detected
