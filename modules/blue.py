@@ -56,11 +56,11 @@ class Scanner:
             will_arm = not self.bluetooth.is_there_friendly_devices_nearby()
             if not self.is_armed:
                 if will_arm:
-                    self.sms.send_sms_async('system armed')
+                    Observable.just(True).subscribe(SmsObserver('system armed'))
                     self.is_armed = True
                     self.blueStream.on_next(True)
             else:
                 if not will_arm:
-                    self.sms.send_sms_async('system disarmed')
+                    Observable.just(True).subscribe(SmsObserver('system disarmed'))
                     self.is_armed = False
                     self.blueStream.on_next(False)
